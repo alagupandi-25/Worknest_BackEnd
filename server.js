@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
-const port = 3000;
+const port = 8080;
 
 require('dotenv').config();
 
@@ -16,13 +16,14 @@ const dbConnection = require('./config/db');
 const User = require('./models/User')
 
 const authRoute = require('./routes/authRoutes');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 
 dbConnection();
 
 app.use("/user",authRoute);
 
-app.get('/', (req, res) => {
+app.get('/', authMiddleware.authenticateToken, authMiddleware.authorizeRoles("Employee") ,(req, res) => {
     res.send('Hello World');
 });
 

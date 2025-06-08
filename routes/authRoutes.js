@@ -42,7 +42,7 @@ router.post("/", async(req , res) => {
         const expiresAt = new Date(now.getTime() + expiresInMs);   
 
         const token = jwt.sign(
-            { id: userObj._id, userEmail : userObj.email }, 
+            { id: userObj._id, userEmail : userObj.email , role: userObj.role  }, 
             process.env.SECRET_KEY, 
             { expiresIn: expiresIn }
         );
