@@ -1,3 +1,5 @@
+"use strict";
+
 const mongoose = require('mongoose');
 
 const deparmentSchema = new mongoose.Schema({
@@ -12,9 +14,9 @@ const deparmentSchema = new mongoose.Schema({
     },
     head : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : "Employee"
+        ref : "Employee",
     }
-}) 
+});
 
 const deparment = mongoose.model("Deparment",deparmentSchema);
 

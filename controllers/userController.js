@@ -10,7 +10,7 @@ const createUser = async function(userContent){
 };
 
 const getUser = async function(field){
-    return User.findOne({field});
+    return User.findOne(field);
 }
 
 module.exports = {

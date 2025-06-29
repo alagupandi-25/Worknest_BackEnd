@@ -16,12 +16,16 @@ const dbConnection = require('./config/db');
 const User = require('./models/User')
 
 const authRoute = require('./routes/authRoutes');
-const authMiddleware = require('./middlewares/authMiddleware');
+const deparRoute = require('./routes/departmentRoute');
+const empRoute = require('./routes/employeeRoute');
 
+const authMiddleware = require('./middlewares/authMiddleware');
 
 dbConnection();
 
 app.use("/user",authRoute);
+app.use("/employee",empRoute);
+app.use('/department',deparRoute);
 
 app.get('/', authMiddleware.authenticateToken, authMiddleware.authorizeRoles("Employee") ,(req, res) => {
     res.send('Hello World');

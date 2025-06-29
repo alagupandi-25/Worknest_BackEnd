@@ -6,16 +6,12 @@ const jwt = require('jsonwebtoken');
 
 const userController = require('../controllers/userController');
 
-
-
-
 const expiresIn = '12h';
 const expiresInMs = 12 * 60 * 60 * 1000;
 
 router.post("/create" , async (req,res) => {
     try{
         const userObj = await userController.createUser(req.body);
-        console.log();
         res.status(201).send(userObj);
     }
     catch(e){
@@ -28,11 +24,8 @@ router.post("/create" , async (req,res) => {
 router.post("/", async(req , res) => {
     try{
         const {email,password} = req.body;
-        console.log(email,password);
-        
-        const userObj = await userController.getUser();
-
-        console.log(userObj,process.env.SECRET_KEY);
+       
+        const userObj = await userController.getUser({email});
 
         if (!userObj || !(await userObj.comparePassword(password))) {
             return res.status(401).json({ message: 'Invalid credentials' });
