@@ -1,30 +1,28 @@
 "use strict";
 
 const mongoose = require('mongoose');
+const validator = require("../utils/validator");
 
 const employeeSchema = new mongoose.Schema({
     user : {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: [true, "Employee must be existing user"]
     },
     employeeId : { 
         type: Number,
-        required: true,
+        required: [true, "Employee id is required"],
         unique: true
     },
     department:   { 
-        type: Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'Department', 
-        required: true
     },
     phone: {
         type: String,
         validate: {
-            validator: function (v) {
-                return /^\d{10}$/.test(v); 
-            },
-            message: props => 'Phone number is not a valid 10-digit phone number!'
+            validator: validator.phoneValidator,
+            message: (props) => 'Phone number is not a valid 10-digit phone number!'
         },
         required: [true, 'Phone number is required']
     },
@@ -33,7 +31,7 @@ const employeeSchema = new mongoose.Schema({
     },
     joiningDate : { 
         type: Date, 
-        required: true
+        required: [true , "Joining Date is required"]
     },
     status: { 
         type: String, 
@@ -41,8 +39,7 @@ const employeeSchema = new mongoose.Schema({
         default: 'active' 
     },
     leaveDate : { 
-        type: Date, 
-        required: true
+        type: Date
     },
     gender : {
         type: String, 

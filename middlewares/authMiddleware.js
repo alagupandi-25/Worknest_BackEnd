@@ -18,7 +18,6 @@ const authenticateToken = (req , res , next) => {
                 message : 'Invalid or expired token'
             })
         }
-
         req.jwtdata = decoded;
         
         next();
