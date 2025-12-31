@@ -9,6 +9,10 @@ const employeeSchema = new mongoose.Schema({
         ref: 'User',
         required: [true, "Employee must be existing user"]
     },
+    profilePic : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Profile',
+    },
     employeeId : { 
         type: Number,
         required: [true, "Employee id is required"],

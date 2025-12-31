@@ -40,19 +40,17 @@ router.post("/", async(req , res) => {
             { expiresIn: expiresIn }
         );
 
-        res.status(200).json(
-            {   
-                message : "Login successful",
-                token : token ,
-                expiresAt: expiresAt.toISOString(),
-                user : {
-                    firstName : userObj.firstName,
-                    lastName : userObj.lastName,
-                    email : userObj.email,
-                    role : userObj.role,
-                }
+        res.status(200).json({   
+            message : "Login successful",
+            token : token ,
+            expiresAt: expiresAt.toISOString(),
+            user : {
+                firstName : userObj.firstName,
+                lastName : userObj.lastName,
+                email : userObj.email,
+                role : userObj.role,
             }
-        );
+        });
     }
     catch(e){
         res.status(400).json({

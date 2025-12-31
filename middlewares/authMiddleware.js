@@ -33,7 +33,7 @@ const authorizeRoles = (...allowedRole) => {
                 message: 'Unauthorized: No user information found' 
             });
         }
-
+        
         if (!allowedRole.includes(tokenInfo.role)) {
             return res.status(403).json({ 
                 message: `Access denied: Role '${tokenInfo.role}' is not allowed`
