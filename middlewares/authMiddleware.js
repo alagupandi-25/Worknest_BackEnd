@@ -18,7 +18,7 @@ const authenticateToken = (req , res , next) => {
                 message : 'Invalid or expired token'
             })
         }
-        req.jwtdata = decoded;
+        req.authData = decoded;
         
         next();
     });
@@ -26,7 +26,7 @@ const authenticateToken = (req , res , next) => {
 
 const authorizeRoles = (...allowedRole) => {
     return (req, res , next) => {
-        const tokenInfo = req.jwtdata;
+        const tokenInfo = req.authData;
 
         if (!tokenInfo) {
             return res.status(401).json({ 

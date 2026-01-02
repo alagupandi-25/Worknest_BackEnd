@@ -2,15 +2,15 @@
 
 const Department = require('../models/Department');
 
-const getDepartment = async function (field) {
+const getDepartment = async (field) => {
     return Department.findOne(field);
 }
 
-const getAllDepartment = async function () {
+const getAllDepartment = () => {
     return Department.find();    
 }
 
-const createDepartment = async function (departContent) {
+const createDepartment = async (departContent) => {
     const obj = new Department(departContent);
     obj.head = null;
     await obj.validate();
@@ -18,11 +18,11 @@ const createDepartment = async function (departContent) {
     return obj;
 }
 
-const updateDepartment = async function (id, updateData) {
+const updateDepartment = (id, updateData) => {
     return Department.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
 }
 
-const deleteDepartment = async function (id) {
+const deleteDepartment = (id) => {
     return Department.findByIdAndDelete(id);
 }
 
